@@ -1,7 +1,6 @@
-package be.pxl.services.department.domain;
+package be.pxl.services.department.domain.dto;
 
-import be.pxl.services.department.domain.dto.EmployeeDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,16 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity
-@Table(name = "department")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Department {
+public class DepartmentRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long organizationId;
     private String name;

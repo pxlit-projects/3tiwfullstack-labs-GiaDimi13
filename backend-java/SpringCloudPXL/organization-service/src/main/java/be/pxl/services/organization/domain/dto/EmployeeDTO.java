@@ -1,4 +1,4 @@
-package be.pxl.services.department.DTO;
+package be.pxl.services.organization.domain.dto;
 
 import jakarta.persistence.Embeddable;
 

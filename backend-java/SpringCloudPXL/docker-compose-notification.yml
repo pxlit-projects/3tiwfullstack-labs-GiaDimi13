@@ -1,0 +1,9 @@
+services:
+  mysql-db:
+    image: mysql:8.3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: notificationservice_db
+    ports:
+      - "8083:8083"
+    command: --default-authentication-plugin=mysql_native_password
