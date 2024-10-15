@@ -1,9 +1,9 @@
 package be.pxl.services;
 
-
-import be.pxl.services.employee.EmployeeServiceApplication;
-import be.pxl.services.employee.domain.Employee;
-import be.pxl.services.employee.repository.EmployeeRepository;
+import be.pxl.services.department.DepartmentServiceApplication;
+import be.pxl.services.department.domain.Department;
+import be.pxl.services.department.domain.dto.EmployeeDTO;
+import be.pxl.services.department.repository.DepartmentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,17 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = EmployeeServiceApplication.class)
+@SpringBootTest(classes = DepartmentServiceApplication.class)
 @AutoConfigureMockMvc
 @Testcontainers
-public class EmployeeTests {
+public class DepartmentTests {
 
     @Autowired
     MockMvc mockMvc;
@@ -37,8 +38,7 @@ public class EmployeeTests {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
+    private DepartmentRepository departmentRepository;
 
     @Container
     private static MySQLContainer sqlContainer =
@@ -52,32 +52,41 @@ public class EmployeeTests {
     }
 
     @Test
-    public void testCreateEmployee() throws Exception {
-        Employee employee = Employee.builder()
-                .age(24)
-                .name("dimi")
-                .position("student")
+    public void createDepartment() throws Exception{
+        List<EmployeeDTO> employees = new ArrayList<>();
+        employees.add(EmployeeDTO.builder().name("Dimi").age(24).position("student").build());
+        employees.add(EmployeeDTO.builder().name("Test").age(27).position("student").build());
+
+        Department department = Department.builder()
+                .name("Test")
+                .employees(employees)
+                .position("Test")
                 .build();
 
-        String employeeString = objectMapper.writeValueAsString(employee);
+        String departmentString = objectMapper.writeValueAsString(department);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/employee")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/department")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(employeeString))
+                .content(departmentString))
                 .andExpect(status().isCreated());
 
-        assertEquals(1,employeeRepository.findAll().size());
+        assertEquals(1, departmentRepository.findAll().size());
     }
+
     @Test
-    public void getEmployee() throws Exception {
-        Employee employee = Employee.builder()
-                .age(24)
-                .name("dimi")
-                .position("student")
+    public void getDepartment() throws Exception {
+        List<EmployeeDTO> employees = new ArrayList<>();
+        employees.add(EmployeeDTO.builder().name("Dimi").age(24).position("student").build());
+        employees.add(EmployeeDTO.builder().name("Test").age(27).position("student").build());
+
+        Department department = Department.builder()
+                .name("Test")
+                .employees(employees)
+                .position("Test")
                 .build();
-        employeeRepository.save(employee);
+        departmentRepository.save(department);
         // Perform the GET request and capture the response
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/employee")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/department")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())  // Check status is 200 OK
                 .andReturn();  // Capture the result of the request
@@ -86,13 +95,13 @@ public class EmployeeTests {
         String jsonResponse = mvcResult.getResponse().getContentAsString();
 
         // Convert JSON response to List<Employee> using ObjectMapper
-        List<Employee> employees = Arrays.asList(objectMapper.readValue(jsonResponse, Employee[].class));
+        List<Department> departments = Arrays.asList(objectMapper.readValue(jsonResponse, Department[].class));
 
         // Use assertions to verify the result
-        assertEquals(1, employees.size());  // Check that there is 1 employee in the list
-        assertEquals("dimi", employees.get(0).getName());  // Verify the name of the employee
-        assertEquals(24, employees.get(0).getAge());  // Verify the age of the employee
-        assertEquals("student", employees.get(0).getPosition());  // Verify the position
+        assertEquals(1, departments.size());  // Check that there is 1 employee in the list
+        assertEquals("Test", departments.get(0).getName());  // Verify the name of the employee
+        assertEquals(24, departments.get(0).getEmployees().get(0).getAge());  // Verify the age of the employee
+        assertEquals("Test", departments.get(0).getPosition());  // Verify the position
 
     }
 }
