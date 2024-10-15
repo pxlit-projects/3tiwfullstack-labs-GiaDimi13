@@ -22,8 +22,8 @@ public class Department {
     private Long id;
     private Long organizationId;
     private String name;
-    @ElementCollection //creates a separate table to store a list of the employeeDTO
-    //@Transient  // Indicates that this is not a persistent field in the DB
+
+    @Transient  // Indicates that this is not a persistent field in the DB
     private List<EmployeeDTO> employees;
     private String position;
 }

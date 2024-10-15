@@ -22,9 +22,9 @@ public class Organization {
     private Long Id;
     private String name;
     private String address;
-    @ElementCollection
+    @Transient
     private List<EmployeeDTO> employees;
-    @ElementCollection
+    @Transient
     private List<DepartmentDTO> departments;
 
 }
