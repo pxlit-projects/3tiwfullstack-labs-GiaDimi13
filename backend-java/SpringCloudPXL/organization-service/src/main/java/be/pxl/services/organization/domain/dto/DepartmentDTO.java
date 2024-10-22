@@ -19,24 +19,4 @@ public class DepartmentDTO {
     private String name;
     private List<EmployeeDTO> employees;
     private String position;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getOrganizationId() {
-        return organizationId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<EmployeeDTO> getEmployees() {
-        return employees;
-    }
-
-    public String getPosition() {
-        return position;
-    }
 }

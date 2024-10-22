@@ -10,4 +10,7 @@ public interface IDepartmentService {
 
     void addDepartment(DepartmentRequest departmentRequest);
 
+    DepartmentResponse getDepartmentById(Long id);
+
+    List<DepartmentResponse> getByOrganization(Long organizationId);
 }

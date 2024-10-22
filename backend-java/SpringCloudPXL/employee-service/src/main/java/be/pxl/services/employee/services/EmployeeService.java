@@ -5,7 +5,9 @@ import be.pxl.services.employee.domain.dto.EmployeeRequest;
 import be.pxl.services.employee.domain.dto.EmployeeResponse;
 import be.pxl.services.employee.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,5 +39,35 @@ public class EmployeeService implements IEmployeeService{
                 .build();
 
         employeeRepository.save(employee);
+    }
+
+    @Override
+    public EmployeeResponse getEmployeeById(Long id) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
+        return mapToEmployeeResponse(employee);
+    }
+
+    @Override
+    public List<EmployeeResponse> getDepartmentById(Long departmentId) {
+        List<Employee> employees = employeeRepository.findByDepartmentId(departmentId);
+
+        if (employees.isEmpty()) {
+            // You could log this or handle it in some way
+            System.out.println("No employees found for departmentId: " + departmentId);
+        }
+
+        return employees.stream().map(employee -> mapToEmployeeResponse(employee)).toList();
+
+    }
+
+    @Override
+    public List<EmployeeResponse> getOrganizationById(Long organizationId) {
+        List<Employee> employees = employeeRepository.findByOrganizationId(organizationId);
+
+        if (employees.isEmpty()) {
+            System.out.println("No employees found for organizationId: " + organizationId);
+        }
+
+        return employees.stream().map(employee -> mapToEmployeeResponse(employee)).toList();
     }
 }

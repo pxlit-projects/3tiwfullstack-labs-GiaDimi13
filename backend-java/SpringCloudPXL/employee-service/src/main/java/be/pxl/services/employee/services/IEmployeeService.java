@@ -10,4 +10,10 @@ public interface IEmployeeService {
     List<EmployeeResponse> getAllEmployees();
 
     void addEmployee(EmployeeRequest employeeRequest);
+
+    EmployeeResponse getEmployeeById(Long id);
+
+    List<EmployeeResponse> getDepartmentById(Long departmentId);
+
+    List<EmployeeResponse> getOrganizationById(Long organizationId);
 }

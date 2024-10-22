@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Embeddable
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,27 +20,4 @@ public class EmployeeDTO {
     private int age;
     private String position;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getOrganizationId() {
-        return organizationId;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getPosition() {
-        return position;
-    }
 }
