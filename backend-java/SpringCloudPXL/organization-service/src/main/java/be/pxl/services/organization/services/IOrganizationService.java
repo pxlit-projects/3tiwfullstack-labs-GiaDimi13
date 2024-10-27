@@ -10,4 +10,6 @@ public interface IOrganizationService {
 
     void addOrganization(OrganizationRequest organizationRequest);
 
+    OrganizationResponse getOrganizationById(Long id);
+
 }

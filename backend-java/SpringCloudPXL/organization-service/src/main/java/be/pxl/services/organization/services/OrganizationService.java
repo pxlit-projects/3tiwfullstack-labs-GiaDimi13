@@ -5,7 +5,9 @@ import be.pxl.services.organization.domain.dto.OrganizationRequest;
 import be.pxl.services.organization.domain.dto.OrganizationResponse;
 import be.pxl.services.organization.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -41,4 +43,13 @@ public class OrganizationService implements IOrganizationService{
 
         organizationRepository.save(organization);
     }
+
+    @Override
+    public OrganizationResponse getOrganizationById(Long id) {
+        Organization organization = organizationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organization not found"));
+
+        return mapToOrganizationResponse(organization);
+
+    }
+
 }

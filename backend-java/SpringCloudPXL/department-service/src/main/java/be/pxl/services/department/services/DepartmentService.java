@@ -48,7 +48,7 @@ public class DepartmentService implements IDepartmentService{
     }
 
     @Override
-    public List<DepartmentResponse> getByOrganization(Long organizationId) {
+    public List<DepartmentResponse> getByOrganizationId(Long organizationId) {
         List<Department> departments = departmentRepository.findByOrganizationId(organizationId);
 
         if(departments.isEmpty()) {

@@ -33,7 +33,9 @@ public class DepartmentController {
     }
 
     @GetMapping("/organization/{organizationId}")
-    public ResponseEntity<List<DepartmentResponse>> getByOrganization(@PathVariable Long organizationId) {
-        return new ResponseEntity<>(departmentService.getByOrganization(organizationId), HttpStatus.OK);
+    public ResponseEntity<List<DepartmentResponse>> getByOrganizationId(@PathVariable Long organizationId) {
+        return new ResponseEntity<>(departmentService.getByOrganizationId(organizationId), HttpStatus.OK);
     }
+
+    //Todo: add last endpoint findByIdWithEmployees
 }

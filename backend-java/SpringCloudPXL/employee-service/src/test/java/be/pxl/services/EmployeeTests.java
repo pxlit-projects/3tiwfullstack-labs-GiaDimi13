@@ -95,4 +95,55 @@ public class EmployeeTests {
         assertEquals("student", employees.get(0).getPosition());  // Verify the position
 
     }
+    @Test
+    public void getByDepartmentId() throws Exception {
+        Employee employee = Employee.builder()
+                .age(24)
+                .name("dimi")
+                .position("studentPXL")
+                .departmentId(1L)
+                .build();
+
+        employeeRepository.save(employee);
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/employee/department/{departmentId}", 1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+
+        List<Employee> employees = Arrays.asList(objectMapper.readValue(jsonResponse, Employee[].class));
+
+        assertEquals(1,employees.size());
+        assertEquals("dimi", employees.get(0).getName());
+        assertEquals(24, employees.get(0).getAge());
+        assertEquals("studentPXL", employees.get(0).getPosition());
+    }
+
+    @Test
+    public void getByOrganizationId() throws Exception {
+        Employee employee = Employee.builder()
+                .age(24)
+                .name("dimi")
+                .position("studentPXL")
+                .organizationId(1L)
+                .build();
+
+        employeeRepository.save(employee);
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/employee/organization/{organizationId}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+
+        List<Employee> employees = Arrays.asList(objectMapper.readValue(jsonResponse, Employee[].class));
+
+        assertEquals(1,employees.size());
+        assertEquals("dimi", employees.get(0).getName());
+        assertEquals(24, employees.get(0).getAge());
+        assertEquals("studentPXL", employees.get(0).getPosition());
+    }
 }
