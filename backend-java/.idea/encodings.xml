@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/SpringCloudPXL/department-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringCloudPXL/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringCloudPXL/employee-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringCloudPXL/notification-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringCloudPXL/organization-service/src/main/java" charset="UTF-8" />
