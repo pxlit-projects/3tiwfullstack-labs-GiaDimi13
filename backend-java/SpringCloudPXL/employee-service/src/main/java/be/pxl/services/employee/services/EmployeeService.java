@@ -1,6 +1,8 @@
 package be.pxl.services.employee.services;
 
+import be.pxl.services.employee.client.NotificationClient;
 import be.pxl.services.employee.domain.Employee;
+import be.pxl.services.employee.domain.NotificationRequest;
 import be.pxl.services.employee.domain.dto.EmployeeRequest;
 import be.pxl.services.employee.domain.dto.EmployeeResponse;
 import be.pxl.services.employee.repository.EmployeeRepository;
@@ -12,10 +14,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class EmployeeService implements IEmployeeService{
+@RequiredArgsConstructor // zorgt voor de autowiring
+public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final NotificationClient notificationClient;
+
     @Override
     public List<EmployeeResponse> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
@@ -39,6 +43,12 @@ public class EmployeeService implements IEmployeeService{
                 .build();
 
         employeeRepository.save(employee);
+
+        NotificationRequest notificationRequest = NotificationRequest.builder()
+                .message("Employee created")
+                .to("Dimi")
+                .build();
+        notificationClient.sendNotification(notificationRequest);
     }
 
     @Override

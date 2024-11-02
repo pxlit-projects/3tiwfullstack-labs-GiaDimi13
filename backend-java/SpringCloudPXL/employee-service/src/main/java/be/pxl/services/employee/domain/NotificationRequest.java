@@ -1,18 +1,16 @@
-package be.pxl.services.domain;
+package be.pxl.services.employee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notification {
+public class NotificationRequest {
 
-    private Long id;
     private String from;
     private String to;
     private String subject;
