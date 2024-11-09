@@ -1,6 +1,5 @@
 package be.pxl.services.department.domain;
 
-import be.pxl.services.department.domain.dto.EmployeeDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +23,6 @@ public class Department {
     private String name;
 
     @Transient  // Indicates that this is not a persistent field in the DB
-    private List<EmployeeDTO> employees;
+    private List<Employee> employees;
     private String position;
 }

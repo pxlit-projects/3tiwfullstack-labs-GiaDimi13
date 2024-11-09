@@ -1,6 +1,5 @@
-package be.pxl.services.department.domain.dto;
+package be.pxl.services.department.domain;
 
-import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDTO {
+public class Employee {
     private Long id;
 
     private Long organizationId;

@@ -13,4 +13,5 @@ public interface IDepartmentService {
     DepartmentResponse getDepartmentById(Long id);
 
     List<DepartmentResponse> getByOrganizationId(Long organizationId);
+    List<DepartmentResponse> findByOrganizationWithEmployees(Long organizationId);
 }

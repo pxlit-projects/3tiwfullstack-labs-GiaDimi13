@@ -2,7 +2,7 @@ package be.pxl.services;
 
 import be.pxl.services.department.DepartmentServiceApplication;
 import be.pxl.services.department.domain.Department;
-import be.pxl.services.department.domain.dto.EmployeeDTO;
+import be.pxl.services.department.domain.Employee;
 import be.pxl.services.department.repository.DepartmentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -53,9 +53,9 @@ public class DepartmentTests {
 
     @Test
     public void createDepartment() throws Exception{
-        List<EmployeeDTO> employees = new ArrayList<>();
-        employees.add(EmployeeDTO.builder().name("Dimi").age(24).position("student").build());
-        employees.add(EmployeeDTO.builder().name("Test").age(27).position("student").build());
+        List<Employee> employees = new ArrayList<>();
+        employees.add(Employee.builder().name("Dimi").age(24).position("student").build());
+        employees.add(Employee.builder().name("Test").age(27).position("student").build());
 
         Department department = Department.builder()
                 .name("Test")
@@ -75,9 +75,9 @@ public class DepartmentTests {
 
     @Test
     public void getDepartment() throws Exception {
-        List<EmployeeDTO> employees = new ArrayList<>();
-        employees.add(EmployeeDTO.builder().name("Dimi").age(24).position("student").build());
-        employees.add(EmployeeDTO.builder().name("Test").age(27).position("student").build());
+        List<Employee> employees = new ArrayList<>();
+        employees.add(Employee.builder().name("Dimi").age(24).position("student").build());
+        employees.add(Employee.builder().name("Test").age(27).position("student").build());
 
         Department department = Department.builder()
                 .name("Test")

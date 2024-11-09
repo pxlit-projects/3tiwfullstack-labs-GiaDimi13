@@ -41,6 +41,4 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeResponse>> getByOrganization(@PathVariable Long organizationId) {
         return new ResponseEntity<>(employeeService.getOrganizationById(organizationId), HttpStatus.OK);
     }
-
-
 }
